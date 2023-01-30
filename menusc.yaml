@@ -1,0 +1,11 @@
+commands:
+  n:
+    name: children 
+    children:
+      y: 
+        name: chrome browser
+        command: open -a chrome
+      n: 
+        name: telegram app
+        command: open -a telegram
+        
