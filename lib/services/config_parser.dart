@@ -21,7 +21,7 @@ class ConfigParser {
 
     if (shellCommand != null) {
       return [
-        MapEntry(parentPath, name ?? 'no name'),
+        MapEntry(parentPath, shellCommand),
       ];
     } else if (children != null) {
       final parsedChildren = children.entries

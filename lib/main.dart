@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:menusc/config_parser.dart';
-import 'package:menusc/config_reader.dart';
+import 'package:menusc/services/config_parser.dart';
+import 'package:menusc/services/config_reader.dart';
 
 Future<void> app(List<String> args) async {
   final config = ConfigReader().read();
@@ -29,6 +29,12 @@ Future<void> app(List<String> args) async {
     if (selectedCommand != null) {
       stdout.writeln('');
       stdout.writeln('executing command:$selectedCommand');
+      final result = await Process.run(Platform.environment['SHELL'] ?? 'bash', [
+        '-c',
+        selectedCommand,
+      ]);
+      stdout.writeln(result.stdout);
+      stdout.writeln(result.stderr);
     }
   }
 }

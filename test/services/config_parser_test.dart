@@ -1,4 +1,4 @@
-import 'package:menusc/config_parser.dart';
+import 'package:menusc/services/config_parser.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -22,8 +22,8 @@ commands:
 """);
     expect(commands, {
       'n': 'apps',
-      'ny': 'chrome browser',
-      'nn': 'telegram',
+      'ny': 'open -a chrome',
+      'nn': 'open -a telegram',
     });
   });
 }
