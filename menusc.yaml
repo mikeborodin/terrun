@@ -1,25 +1,37 @@
 commands:
   n:
-    name: apps 
+    name: group1
     children:
-      y: 
+      y:
         name: chrome browser
         command: open -a Google\ Chrome.app
-      n: 
+      n:
         name: telegram app
         command: open -a telegram
-      e: 
+      e:
         name: slack
         command: open -a slack
-      i: 
+      i:
         name: code
         command: open -a Visual\ Studio\ Code.app
   t:
-    name: coding      
+    name: group2
     children:
       y:
-       name: run all
-       command: appChrome &&  appSlack && appTelegram &&  ssh-add -K &&  codeAfBest    
+        name: run all
+        command: appChrome &&  appSlack && appTelegram &&  ssh-add -K &&  codeAfBest
       n:
-       name: run afbest
-       command: code $AF_BEST    
+        name: run afbest
+        command: code $AF_BEST
+      w:
+        name: work projects
+        children:
+          n:
+            name: best practices
+            command: code $AF_BEST
+          e:
+            name: steri
+            command: code ~/projects/steripharm
+          i:
+            name: usm
+            command: code ~/projects/usm

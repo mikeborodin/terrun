@@ -7,7 +7,7 @@ void main() {
   setUp(() {
     parser = ConfigParser();
   });
-  test('should parse 3 items from nested yaml config', () async {
+  test('should parse 3 leveled yaml config', () async {
     final commands = parser.parse("""
 commands:
   n:
@@ -20,10 +20,44 @@ commands:
         name: telegram
         command: open -a telegram
 """);
-    expect(commands, {
-      'n': 'apps',
-      'ny': 'open -a chrome',
-      'nn': 'open -a telegram',
-    });
+    expect(
+      commands.keys,
+      equals(
+        [
+          'n',
+          'ny',
+          'nn',
+        ],
+      ),
+    );
+  });
+
+  test('should parse 3 leveled yaml config', () async {
+    final commands = parser.parse("""
+commands:
+  n:
+    name: group1 
+    children:
+      y: 
+        name: chrome browser
+        command: open -a chrome
+      n: 
+        name: group2
+        children:
+          t:
+            name: telegram
+            command: open -a telegram
+""");
+    expect(
+      commands.keys,
+      equals(
+        [
+          'n',
+          'ny',
+          'nn',
+          'nnt',
+        ],
+      ),
+    );
   });
 }

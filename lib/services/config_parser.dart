@@ -1,7 +1,8 @@
+import 'package:menusc/core/core.dart';
 import 'package:yaml/yaml.dart';
 
 class ConfigParser {
-  Map<String, String> parse(String file) {
+  Map<String, Command> parse(String file) {
     final doc = loadYamlDocument(file);
     final map = doc.contents.value as YamlMap;
 
@@ -11,7 +12,7 @@ class ConfigParser {
     return parsedMap;
   }
 
-  List<MapEntry<String, String>> _parseChildren(
+  List<MapEntry<String, Command>> _parseChildren(
     String parentPath,
     YamlMap map,
   ) {
@@ -21,7 +22,14 @@ class ConfigParser {
 
     if (shellCommand != null) {
       return [
-        MapEntry(parentPath, shellCommand),
+        MapEntry(
+          parentPath,
+          Command(
+            name: shellCommand,
+            isGroup: false,
+            script: shellCommand,
+          ),
+        ),
       ];
     } else if (children != null) {
       final parsedChildren = children.entries
@@ -34,7 +42,14 @@ class ConfigParser {
           .expand((pair) => pair);
 
       return [
-        MapEntry(parentPath, name!),
+        MapEntry(
+          parentPath,
+          Command(
+            name: name!,
+            isGroup: true,
+            script: null,
+          ),
+        ),
         ...parsedChildren.toList(),
       ];
     } else if (map.keys.isNotEmpty) {

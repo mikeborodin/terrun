@@ -1,40 +1,56 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:menusc/services/config_parser.dart';
-import 'package:menusc/services/config_reader.dart';
+import 'package:menusc/core/command_matcher.dart';
+
+import 'core/core.dart';
+import 'services/services.dart';
 
 Future<void> app(List<String> args) async {
+  final RunnerService runner = ProcessRunnerService();
+  final DisplayService display = ConsoleDisplaySevice();
+  final matcher = CommandMatcher();
+  display.init();
+
   final config = ConfigReader().read();
   final commands = ConfigParser().parse(config);
+  display.clear();
 
+// we run program forever
   while (true) {
-    String buffer = '';
-    while (buffer.length < 2) {
-      stdin.echoMode = false;
-      stdin.echoNewlineMode = false;
-      stdin.lineMode = false;
-      final letter = utf8.decode([stdin.readByteSync()]);
-      buffer += letter;
-      print("\x1B[2J\x1B[0;0H");
-      stdout.writeln('Typing: $buffer');
-      final matchingCommands = commands.entries.where(
-        (entry) => entry.key.startsWith(buffer),
-      );
-      for (final command in matchingCommands) {
-        stdout.writeln('[${command.key}] ${command.value}');
+    String input = '';
+    bool isPrefix = true;
+    // selecting the command
+    Command? selectedCommand;
+
+    while (isPrefix) {
+      final character = utf8.decode([stdin.readByteSync()]);
+      final newInput = input + character;
+      isPrefix = matcher.getPotentialMatches(commands, newInput) > 0;
+      if (isPrefix) {
+        input = newInput;
+        display.drawMatchingCommands(input, commands);
+        print(input);
+
+        final selectedCommand = matcher.getFromTree(commands, input);
+        if (selectedCommand != null) {
+          input = '';
+          break;
+        }
+      } else {
+        input = '';
+        display.clear();
+        print('$newInput didnt matchin any of keys in ${commands.keys.map((e) => e).join(',')}');
       }
     }
-    final selectedCommand = commands[buffer];
+
     if (selectedCommand != null) {
-      stdout.writeln('');
+      display.clear();
       stdout.writeln('executing command:$selectedCommand');
-      final result = await Process.run(Platform.environment['SHELL'] ?? 'bash', [
-        '-c',
-        selectedCommand,
-      ]);
-      stdout.writeln(result.stdout);
-      stdout.writeln(result.stderr);
+      if (selectedCommand.script != null) {
+        await runner.run(selectedCommand.script!);
+      }
+      selectedCommand = null;
     }
   }
 }

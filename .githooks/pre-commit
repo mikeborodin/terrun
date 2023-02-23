@@ -1,2 +1,2 @@
-flutter analyze
-flutter test
+dart analyze
+dart test
