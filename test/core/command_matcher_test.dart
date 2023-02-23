@@ -14,6 +14,17 @@ void main() {
 
     expect(numberOfMathes, equals(1));
   });
+  test('getPotential matches should return one with for full match', () async {
+    final numberOfMathes = CommandMatcher().getPotentialMatches({
+      'nnn': Command(
+        name: 'test',
+        isGroup: false,
+        script: null,
+      ),
+    }, 'nnn');
+
+    expect(numberOfMathes, equals(1));
+  });
 
   test('getPotential matches should return 2 with 2 matches', () async {
     final numberOfMathes = CommandMatcher().getPotentialMatches({
