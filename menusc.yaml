@@ -25,4 +25,4 @@ commands:
         children:
           e:
             name: menusc project
-            command: code ~/personal_projects/menusc/
+            command: code ~/persHonal_projects/menusc/
