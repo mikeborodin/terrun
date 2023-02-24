@@ -1,6 +1,6 @@
 commands:
   n:
-    name: group1
+    name: apps
     children:
       y:
         name: Chrome
@@ -15,26 +15,14 @@ commands:
         name: VSCode
         command: open -a Visual\ Studio\ Code.app
   t:
-    name: group2
+    name: projects
     children:
-      y:
-        name: run all
-        command: appChrome &&  appSlack && appTelegram &&  ssh-add -K &&  codeAfBest
-      n:
-        name: run afbest
-        command: code $AF_BEST
+      m:
+        name: experiment
+        command: osascript -e 'tell application "System Events" to keystroke "tab" using command down'
       w:
-        name: work projects
+        name: personal projects
         children:
-          n:
-            name: best practices
-            command: code $AF_BEST
           e:
-            name: steri
-            command: code ~/projects/steripharm
-          i:
-            name: usm
-            command: code ~/projects/usm
-          m:
-            name: tab
-            command: osascript -e 'tell application "System Events" to keystroke "tab" using command down'
+            name: menusc project
+            command: code ~/personal_projects/menusc/
