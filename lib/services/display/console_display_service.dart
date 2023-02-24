@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:ansicolor/ansicolor.dart';
+import 'package:menusc/services/services.dart';
 
 import '../../core/core.dart';
-import 'display_service.dart';
 
 class ConsoleDisplaySevice implements DisplayService {
   @override
@@ -12,11 +11,8 @@ class ConsoleDisplaySevice implements DisplayService {
     Map<String, Command> commands,
   ) {
     _clear();
-    final blueOnWhite = AnsiPen()
-      ..white(bg: true)
-      ..blue();
+    _drawInput(input);
 
-    stdout.writeln(blueOnWhite('Typing: $input'));
     final matchingCommands = commands.entries.where(
       (entry) => entry.key.startsWith(input),
     );
@@ -26,9 +22,9 @@ class ConsoleDisplaySevice implements DisplayService {
 
       String result = '';
       if (command.isGroup) {
-        result = '[$shortcut] ${command.name}';
+result = '\n${command.name}:'.colored(6);
       } else {
-        result = '[$shortcut] ${command.script}';
+        result = '${'[$shortcut]'.colored(2)} ${command.name} ${'${command.script}'.colored(244)}';
       }
       stdout.writeln(result);
     }
@@ -46,4 +42,10 @@ class ConsoleDisplaySevice implements DisplayService {
   void clear() => _clear();
 
   void _clear() => print("\x1B[2J\x1B[0;0H");
+
+  void _drawInput(String input) {
+    stdout.writeln('----------------------');
+    stdout.writeln('Input: ${input.colored(2)}');
+    stdout.writeln('----------------------');
+  }
 }

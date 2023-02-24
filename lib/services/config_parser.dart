@@ -25,7 +25,7 @@ class ConfigParser {
         MapEntry(
           parentPath,
           Command(
-            name: shellCommand,
+            name: name ?? 'N/A',
             isGroup: false,
             script: shellCommand,
           ),
