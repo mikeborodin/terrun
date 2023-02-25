@@ -1,3 +1,7 @@
+
+hooks:
+  preCommand:
+    - osascript -e 'tell application "System Events" to key code 24 using {shift down, control down}'
 commands:
   n:
     name: apps
@@ -8,12 +12,21 @@ commands:
       n:
         name: Telegram
         command: open -a telegram
+      s:
+        name: Spotify
+        command: open -a spotify
       e:
         name: Slack
         command: open -a slack
       i:
         name: VSCode
         command: open -a Visual\ Studio\ Code.app
+  u: 
+    name: utilities
+    children:
+      h:
+        name: hide
+        command: osascript -e 'tell application "System Events" to key code 24 using {shift down, control down}'        
   t:
     name: projects
     children:

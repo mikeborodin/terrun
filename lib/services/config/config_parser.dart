@@ -2,14 +2,17 @@ import 'package:menusc/core/core.dart';
 import 'package:yaml/yaml.dart';
 
 class ConfigParser {
-  Map<String, Command> parse(String file) {
+  Config parse(String file) {
     final doc = loadYamlDocument(file);
     final map = doc.contents.value as YamlMap;
 
     final list = _parseChildren('', map.value['commands'] as YamlMap);
     final parsedMap = Map.fromEntries(list);
 
-    return parsedMap;
+    return Config(
+      hooks: Hooks(''),
+      commands: parsedMap,
+    );
   }
 
   List<MapEntry<String, Command>> _parseChildren(

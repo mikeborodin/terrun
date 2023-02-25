@@ -1,4 +1,4 @@
-import 'package:menusc/services/config_parser.dart';
+import 'package:menusc/services/config/config_parser.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -8,7 +8,7 @@ void main() {
     parser = ConfigParser();
   });
   test('should parse 3 leveled yaml config', () async {
-    final commands = parser.parse("""
+    final config = parser.parse("""
 commands:
   n:
     name: apps 
@@ -21,7 +21,7 @@ commands:
         command: open -a telegram
 """);
     expect(
-      commands.keys,
+      config.commands.keys,
       equals(
         [
           'n',
@@ -33,7 +33,7 @@ commands:
   });
 
   test('should parse 3 leveled yaml config', () async {
-    final commands = parser.parse("""
+    final config = parser.parse("""
 commands:
   n:
     name: group1 
@@ -49,7 +49,7 @@ commands:
             command: open -a telegram
 """);
     expect(
-      commands.keys,
+      config.commands.keys,
       equals(
         [
           'n',

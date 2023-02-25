@@ -11,8 +11,9 @@ Future<void> app(List<String> args) async {
   final RunnerService runner = ProcessRunnerService();
   final DisplayService display = ConsoleDisplaySevice()..init();
   
-  final config = ConfigReader().read();
-  final commands = ConfigParser().parse(config);
+  final configContent = ConfigReader().read();
+  final config = ConfigParser().parse(configContent);
+  final commands = config.commands;
 
   display.drawMatchingCommands('', commands);
 
