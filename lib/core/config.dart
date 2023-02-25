@@ -11,7 +11,13 @@ class Config {
 }
 
 class Hooks {
-  final String preCommand;
+  final List<PreCommandHook> preCommand;
 
   Hooks(this.preCommand);
+}
+
+class PreCommandHook {
+  final String command;
+
+  PreCommandHook(this.command);
 }

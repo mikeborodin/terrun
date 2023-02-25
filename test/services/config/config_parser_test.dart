@@ -23,11 +23,7 @@ commands:
     expect(
       config.commands.keys,
       equals(
-        [
-          'n',
-          'ny',
-          'nn',
-        ],
+        ['n', 'ny', 'nn'],
       ),
     );
   });
@@ -51,12 +47,29 @@ commands:
     expect(
       config.commands.keys,
       equals(
-        [
-          'n',
-          'ny',
-          'nn',
-          'nnt',
-        ],
+        ['n', 'ny', 'nn', 'nnt'],
+      ),
+    );
+  });
+  test('should parse hooks from yaml config', () async {
+    final config = parser.parse("""
+hooks:
+  preCommand:
+    - command: test
+  
+commands:
+  n:
+    name: group1 
+    children:
+      y: 
+        name: chrome browser
+        command: open -a chrome
+  
+""");
+    expect(
+      config.hooks.preCommand.first.command,
+      equals(
+        "test",
       ),
     );
   });

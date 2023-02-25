@@ -10,7 +10,7 @@ Future<void> app(List<String> args) async {
   final matcher = CommandMatcher();
   final RunnerService runner = ProcessRunnerService();
   final DisplayService display = ConsoleDisplaySevice()..init();
-  
+
   final configContent = ConfigReader().read();
   final config = ConfigParser().parse(configContent);
   final commands = config.commands;
@@ -49,7 +49,10 @@ Future<void> app(List<String> args) async {
 
     if (selectedCommand != null) {
       if (selectedCommand.script != null) {
-        await runner.run(selectedCommand.script!);
+        await runner.run(
+          selectedCommand.script!,
+          config.hooks,
+        );
       }
       selectedCommand = null;
       display.drawMatchingCommands('', commands);

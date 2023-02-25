@@ -3,16 +3,35 @@ import 'package:yaml/yaml.dart';
 
 class ConfigParser {
   Config parse(String file) {
-    final doc = loadYamlDocument(file);
-    final map = doc.contents.value as YamlMap;
+    final document = loadYamlDocument(file);
+    final map = document.contents.value as YamlMap;
 
-    final list = _parseChildren('', map.value['commands'] as YamlMap);
-    final parsedMap = Map.fromEntries(list);
+    final parsedMap = _parseCommands(map);
+    final hooks = _parseHooks(map);
 
     return Config(
-      hooks: Hooks(''),
+      hooks: hooks,
       commands: parsedMap,
     );
+  }
+
+  Hooks _parseHooks(YamlMap map) {
+    final hooksYaml = map.value['hooks'] as YamlMap;
+    var hooks = Hooks(
+      (hooksYaml.value['preCommand'] as YamlList).nodes.map(
+        (yamlHook) {
+          final yaml = yamlHook.value as YamlMap;
+          return PreCommandHook(yaml.value['command'] as String);
+        },
+      ).toList(),
+    );
+    return hooks;
+  }
+
+  Map<String, Command> _parseCommands(YamlMap map) {
+    final list = _parseChildren('', map.value['commands'] as YamlMap);
+    final parsedMap = Map.fromEntries(list);
+    return parsedMap;
   }
 
   List<MapEntry<String, Command>> _parseChildren(
