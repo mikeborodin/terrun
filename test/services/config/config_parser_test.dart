@@ -51,10 +51,10 @@ commands:
       ),
     );
   });
-  test('should parse hooks from yaml config', () async {
+  test('should parse preRun hooks from yaml config', () async {
     final config = parser.parse("""
 hooks:
-  preCommand:
+  preRun:
     - command: test
   
 commands:
@@ -67,7 +67,30 @@ commands:
   
 """);
     expect(
-      config.hooks.preCommand.first.command,
+      config.hooks.preRun.first.command,
+      equals(
+        "test",
+      ),
+    );
+  });
+
+  test('should parse postRun hooks from yaml config', () async {
+    final config = parser.parse("""
+hooks:
+  postRun:
+    - command: test
+  
+commands:
+  n:
+    name: group1 
+    children:
+      y: 
+        name: chrome browser
+        command: open -a chrome
+  
+""");
+    expect(
+      config.hooks.postRun.first.command,
       equals(
         "test",
       ),

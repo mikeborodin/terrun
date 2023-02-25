@@ -16,14 +16,24 @@ class ConfigParser {
   }
 
   Hooks _parseHooks(YamlMap map) {
-    final hooksYaml = map.value['hooks'] as YamlMap;
+    final hooksYaml = map.value['hooks'] as YamlMap?;
+    if (hooksYaml == null) {
+      return Hooks([], []);
+    }
+
+    List<CommandHook> parseHooks(String name) {
+      return (hooksYaml.value[name] as YamlList?)?.nodes.map(
+            (yamlHook) {
+              final yaml = yamlHook.value as YamlMap;
+              return CommandHook(yaml.value['command'] as String);
+            },
+          ).toList() ??
+          [];
+    }
+
     var hooks = Hooks(
-      (hooksYaml.value['preCommand'] as YamlList).nodes.map(
-        (yamlHook) {
-          final yaml = yamlHook.value as YamlMap;
-          return PreCommandHook(yaml.value['command'] as String);
-        },
-      ).toList(),
+      parseHooks('preRun'),
+      parseHooks('postRun'),
     );
     return hooks;
   }

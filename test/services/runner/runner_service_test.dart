@@ -6,11 +6,21 @@ import 'package:test/test.dart';
 void main() {
   final RunnerService runner = ProcessRunnerService();
   test('run should execute the shell command', () async {
-    final output = await runner.run('print "success"', Hooks(''));
+    final output = await runner.run('print "success"', Hooks([], []));
     expect(output, 'success\n');
   });
   test('it should be possible to specify hook to run before the command', () async {
-    final output = await runner.run('print "success"', Hooks('print "hook"'));
+    final output = await runner.run(
+      'print "success"',
+      Hooks(
+        [
+          CommandHook(
+            'print "hook"',
+          ),
+        ],
+        [],
+      ),
+    );
     expect(output, 'hook\nsuccess\n');
   });
 }

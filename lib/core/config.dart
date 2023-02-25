@@ -1,8 +1,8 @@
 import 'command.dart';
 
 class Config {
-  final Hooks hooks;
   final Map<String, Command> commands;
+  final Hooks hooks;
 
   Config({
     required this.hooks,
@@ -11,13 +11,17 @@ class Config {
 }
 
 class Hooks {
-  final List<PreCommandHook> preCommand;
+  final List<CommandHook> preRun;
+  final List<CommandHook> postRun;
 
-  Hooks(this.preCommand);
+  Hooks(
+    this.preRun,
+    this.postRun,
+  );
 }
 
-class PreCommandHook {
+class CommandHook {
   final String command;
 
-  PreCommandHook(this.command);
+  CommandHook(this.command);
 }

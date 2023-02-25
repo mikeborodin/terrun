@@ -1,9 +1,3 @@
-
-hooks:
-  preCommand:
-    - command: osascript -e 'tell application "System Events" to key code 24 using {shift down, control down}'
-    - command: print "test"
-      
 commands:
   n:
     name: apps
@@ -41,3 +35,10 @@ commands:
           e:
             name: menusc project
             command: code ~/persHonal_projects/menusc/
+
+hooks:
+  preRun:
+    # this emits the shortcut to hide the terminal window 
+    - command: osascript -e 'tell application "System Events" to key code 24 using {shift down, control down}'
+  postRun:
+    - command: terminal-notifier -message 'post run'
