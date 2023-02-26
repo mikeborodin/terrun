@@ -1,2 +1,2 @@
 set -e
-dart compile exe bin/menusc.dart -o build/menusc
+dart compile exe bin/terrun.dart -o build/terrun
