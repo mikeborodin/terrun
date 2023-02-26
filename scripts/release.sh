@@ -30,5 +30,9 @@ end" > ../homebrew-terrun/Formula/terrun.rb
 
 cd ../homebrew-terrun
 git add .
-git commit -m "release $version"
+
+git commit -m "version $version"
 git push origin main
+
+git tag -a $version -m "version $version"
+git push origin $version
