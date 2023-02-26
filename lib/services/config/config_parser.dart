@@ -1,4 +1,4 @@
-import 'package:menusc/core/core.dart';
+import 'package:terrun/core/core.dart';
 import 'package:yaml/yaml.dart';
 
 class ConfigParser {

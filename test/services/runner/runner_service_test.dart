@@ -1,6 +1,6 @@
-import 'package:menusc/core/core.dart';
-import 'package:menusc/services/runner/console_runner_service.dart';
-import 'package:menusc/services/runner/runner_service.dart';
+import 'package:terrun/core/core.dart';
+import 'package:terrun/services/runner/console_runner_service.dart';
+import 'package:terrun/services/runner/runner_service.dart';
 import 'package:test/test.dart';
 
 void main() {

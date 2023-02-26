@@ -1,4 +1,4 @@
-import 'package:menusc/services/config/config_parser.dart';
+import 'package:terrun/services/config/config_parser.dart';
 import 'package:test/test.dart';
 
 void main() {

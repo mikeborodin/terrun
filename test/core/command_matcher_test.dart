@@ -1,5 +1,5 @@
-import 'package:menusc/core/command_matcher.dart';
-import 'package:menusc/core/core.dart';
+import 'package:terrun/core/command_matcher.dart';
+import 'package:terrun/core/core.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:menusc/services/services.dart';
+import 'package:terrun/services/services.dart';
 
 import '../../core/core.dart';
 

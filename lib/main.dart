@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:menusc/core/command_matcher.dart';
+import 'package:terrun/core/command_matcher.dart';
 
 import 'core/core.dart';
 import 'services/services.dart';
