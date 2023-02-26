@@ -20,7 +20,6 @@ Future<void> app(List<String> args) async {
   while (true) {
     String input = '';
     bool isPrefix = true;
-    // selecting the command
     Command? selectedCommand;
 
     while (isPrefix) {
