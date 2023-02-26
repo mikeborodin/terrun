@@ -1,6 +1,6 @@
 name: terrun
-description: A sample command-line application.
-version: 1.0.0
+description: terrun - efficient terminal runner
+version: 0.0.1
 repository: https://github.com/mikeborodin/menusc
 
 environment:

@@ -4,8 +4,11 @@ cd build
 tar -czf terrun.tar.gz terrun
 sha=`shasum -a 256 terrun.tar.gz | cut -d " " -f 1`
 echo $sha
-version="v0.0.1"
+
+
 cd ..
+versionNotSplitted=`awk '/version:/ {print $2}' pubspec.yaml | sed "s/[,']//g"`
+version=`awk -F+ '{print $1}' <<< "$versionNotSplitted"`
 
 gh release create $version build/terrun.tar.gz --generate-notes
 
