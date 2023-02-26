@@ -23,7 +23,7 @@ class Terrun < Formula
   def install
     bin.install \"terrun\"
   end
-end""" > ../homebrew-terrun/Formula/terrun.rb
+end" > ../homebrew-terrun/Formula/terrun.rb
 
 cd ../homebrew-terrun
 git add .
