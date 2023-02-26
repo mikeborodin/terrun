@@ -18,7 +18,7 @@ class Terrun < Formula
   url \"https://github.com/mikeborodin/terrun/releases/download/$version/terrun.tar.gz\"
   sha256 \"$sha\"
   license \"MIT\"
-  version \"$version"
+  version \"$version\"
 
   def install
     bin.install \"terrun\"
