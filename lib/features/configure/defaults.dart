@@ -35,5 +35,5 @@ final defaultsYaml=r'''commands:
   # preRun:
     # - command: osascript -e tell application System Events to key code 24 using {shift down, control down}
   # postRun:
-    # - command: say \'good job $USER\'
+    # - command: say "good job $USER"
 ''';
