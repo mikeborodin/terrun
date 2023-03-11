@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_string_escapes
 
-final defaultsYaml='''commands:
+final defaultsYaml=r'''commands:
   j:
     name: apps
     children:
@@ -34,6 +34,6 @@ final defaultsYaml='''commands:
 # hooks:
   # preRun:
     # #this emits the shortcut to hide the terminal window 
-    # - say 'good job \$USER'
+    # - say 'good job $USER'
     # - command: osascript -e 'tell application "System Events" to key code 24 using {shift down, control down}'
 ''';
