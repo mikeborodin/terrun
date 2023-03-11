@@ -1,4 +1,3 @@
-
 import 'package:terrun/core/core.dart';
 import 'package:terrun/services/runner/runner_service.dart';
 import 'package:terrun/services/shell/shell_service.dart';
@@ -15,7 +14,7 @@ class ProcessRunnerService implements RunnerService {
     final result = await _shell.run(preRun.isNotEmpty ? '$preRun && $command' : command);
 
     if (postRun.isNotEmpty) {
-      final _ = _shell.run(postRun);
+      final _ = await _shell.run(postRun);
     }
 
     if (result.exitCode == 0) {
