@@ -1,10 +1,18 @@
 import 'dart:io';
 
+import 'package:terrun/services/display/theme.dart';
 import 'package:terrun/services/services.dart';
 
 import '../../core/core.dart';
 
 class ConsoleDisplaySevice implements DisplayService {
+
+  final theme = Theme(
+    info: 15,
+    error: 1,
+    success: 2,
+  );
+
   @override
   void drawMatchingCommands(
     String input,
@@ -48,5 +56,18 @@ class ConsoleDisplaySevice implements DisplayService {
     stdout.writeln('----------------------');
     stdout.writeln('Input: ${input.colored(15, bg: 0)}');
     stdout.writeln('----------------------');
+  }
+
+  @override
+  void drawMessage(String message, {MessageType? type = MessageType.info}) {
+    _clear();
+    final color = {
+          MessageType.success: theme.success,
+          MessageType.error: theme.error,
+          MessageType.info: theme.info,
+        }[type] ??
+        theme.info;
+
+    stderr.writeln(message.colored(color));
   }
 }

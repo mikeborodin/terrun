@@ -1,60 +1,33 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:terrun/core/command_matcher.dart';
-
-import 'core/core.dart';
-import 'services/services.dart';
+import 'package:args/command_runner.dart';
+import 'package:terrun/features/configure/configure.dart';
+import 'package:terrun/features/loop.dart';
+import 'package:terrun/services/services.dart';
+import 'package:terrun/services/shell/shell_service.dart';
+import 'package:terrun/services/shell/shell_service_impl.dart';
 
 Future<void> app(List<String> args) async {
-  final matcher = CommandMatcher();
-  final RunnerService runner = ProcessRunnerService();
+  var env = Env.load();
+
+  final ShellService shell = ShellServiceImpl();
+  final RunnerService shellRunner = ProcessRunnerService(shell);
   final DisplayService display = ConsoleDisplaySevice()..init();
 
-  final configContent = ConfigReader().read();
-  final config = ConfigParser().parse(configContent);
-  final commands = config.commands;
+  final commandRunner = CommandRunner(
+    'terrun',
+    'run anything with minimum keystrokes',
+  );
 
-  display.drawMatchingCommands('', commands);
+  commandRunner
+    ..addCommand(ConfigureCommand(
+      display,
+      shell,
+      env,
+    ))
+    ..addCommand(LoopCommand(
+      shellRunner,
+      display,
+      env,
+    ));
 
-  while (true) {
-    String input = '';
-    bool isPrefix = true;
-    Command? selectedCommand;
-
-    while (isPrefix) {
-      final character = utf8.decode([stdin.readByteSync()]);
-      final newInput = input + character;
-      isPrefix = matcher.getPotentialMatches(commands, newInput) > 0;
-      if (isPrefix) {
-        input = newInput;
-        display.drawMatchingCommands(input, commands);
-        selectedCommand = matcher.getFromTree(commands, input);
-
-        if (selectedCommand != null) {
-          input = '';
-          stdout.writeln('running command:$selectedCommand');
-          break;
-        }
-      } else {
-        input = '';
-        display.clear();
-        display.drawMatchingCommands(input, commands);
-
-        var errorMessage = 'Error: "$newInput" didnt matchin any of keys above';
-        print(errorMessage.colored(1));
-      }
-    }
-
-    if (selectedCommand != null) {
-      if (selectedCommand.script != null) {
-        await runner.run(
-          selectedCommand.script!,
-          config.hooks,
-        );
-      }
-      selectedCommand = null;
-      display.drawMatchingCommands('', commands);
-    }
-  }
+  await commandRunner.run(args);
 }
