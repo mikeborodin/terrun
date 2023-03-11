@@ -8,7 +8,7 @@ void main() {
     parser = ConfigParser();
   });
   test('should parse 3 leveled yaml config', () async {
-    final config = parser.parse("""
+    final config = parser.parse('''
 commands:
   n:
     name: apps 
@@ -19,7 +19,7 @@ commands:
       n: 
         name: telegram
         command: open -a telegram
-""");
+''');
     expect(
       config.commands.keys,
       equals(
@@ -29,7 +29,7 @@ commands:
   });
 
   test('should parse 3 leveled yaml config', () async {
-    final config = parser.parse("""
+    final config = parser.parse('''
 commands:
   n:
     name: group1 
@@ -43,7 +43,7 @@ commands:
           t:
             name: telegram
             command: open -a telegram
-""");
+''');
     expect(
       config.commands.keys,
       equals(
@@ -52,7 +52,7 @@ commands:
     );
   });
   test('should parse preRun hooks from yaml config', () async {
-    final config = parser.parse("""
+    final config = parser.parse('''
 hooks:
   preRun:
     - command: test
@@ -65,17 +65,17 @@ commands:
         name: chrome browser
         command: open -a chrome
   
-""");
+''');
     expect(
       config.hooks.preRun.first.command,
       equals(
-        "test",
+        'test',
       ),
     );
   });
 
   test('should parse postRun hooks from yaml config', () async {
-    final config = parser.parse("""
+    final config = parser.parse('''
 hooks:
   postRun:
     - command: test
@@ -88,11 +88,11 @@ commands:
         name: chrome browser
         command: open -a chrome
   
-""");
+''');
     expect(
       config.hooks.postRun.first.command,
       equals(
-        "test",
+        'test',
       ),
     );
   });

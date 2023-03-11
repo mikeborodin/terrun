@@ -50,7 +50,7 @@ class ConsoleDisplaySevice implements DisplayService {
   @override
   void clear() => _clear();
 
-  void _clear() => print("\x1B[2J\x1B[0;0H");
+  void _clear() => print('\x1B[2J\x1B[0;0H');
 
   void _drawInput(String input) {
     stdout.writeln('----------------------');

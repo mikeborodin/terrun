@@ -1,6 +1,6 @@
 name: terrun
 description: terrun - efficient terminal runner
-version: 0.0.3
+version: 0.0.6
 repository: https://github.com/mikeborodin/menusc
 
 environment:
@@ -9,7 +9,6 @@ environment:
 dependencies:
   ansicolor: ^2.0.1
   args: ^2.4.0
-  riverpod: ^2.2.0
   yaml: ^3.1.1
 
 dev_dependencies:
