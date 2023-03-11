@@ -24,19 +24,21 @@ class UpdateCommand extends Command<void> {
       'git -C \$(brew --repository mikeborodin/terrun) pull',
       'brew upgrade terrun',
     ];
-    final updated = await Stream.fromIterable(script).asyncMap((line) => _shell.run(line)).any(
-          (element) => element.stdout != 0,
+    for (final line in script) {
+      final result = await _shell.run(line);
+      if (result.exitCode == 0) {
+        _display.drawMessage(
+          '"$line" finished succesfully ',
+          type: MessageType.success,
+          clear: false,
         );
-    if (updated) {
-      _display.drawMessage(
-        'Updated successfully',
-        type: MessageType.success,
-      );
-    } else {
-      _display.drawMessage(
-        'Error while running lines $script',
-        type: MessageType.error,
-      );
+      } else {
+        _display.drawMessage(
+          'Error while running $line\n${result.stderr}',
+          type: MessageType.error,
+          clear: false,
+        );
+      }
     }
   }
 }

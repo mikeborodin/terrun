@@ -6,7 +6,6 @@ import 'package:terrun/services/services.dart';
 import '../../core/core.dart';
 
 class ConsoleDisplaySevice implements DisplayService {
-
   final theme = Theme(
     info: 15,
     error: 1,
@@ -59,8 +58,14 @@ class ConsoleDisplaySevice implements DisplayService {
   }
 
   @override
-  void drawMessage(String message, {MessageType? type = MessageType.info}) {
-    _clear();
+  void drawMessage(
+    String message, {
+    MessageType? type = MessageType.info,
+    bool clear = true,
+  }) {
+    if (clear) {
+      _clear();
+    }
     final color = {
           MessageType.success: theme.success,
           MessageType.error: theme.error,

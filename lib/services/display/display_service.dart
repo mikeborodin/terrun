@@ -16,5 +16,6 @@ abstract class DisplayService {
   void drawMessage(
     String message, {
     MessageType? type = MessageType.info,
+    bool clear = true,
   });
 }
