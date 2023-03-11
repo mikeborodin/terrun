@@ -7,3 +7,6 @@
 
 ## Installation
 tbd
+
+## Color codes:
+https://raw.github.com/google/ansicolor-dart/master/ansicolor-dart.png

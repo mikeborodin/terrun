@@ -40,5 +40,3 @@ hooks:
   preRun:
     # this emits the shortcut to hide the terminal window 
     - command: osascript -e 'tell application "System Events" to key code 24 using {shift down, control down}'
-  postRun:
-    - command: terminal-notifier -message 'post run'

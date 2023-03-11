@@ -22,9 +22,10 @@ class ConsoleDisplaySevice implements DisplayService {
 
       String result = '';
       if (command.isGroup) {
-result = '\n${command.name}:'.colored(6);
+        result = '\n${command.name}:'.colored(6, bg: 0);
       } else {
-        result = '${'[$shortcut]'.colored(2)} ${command.name} ${'${command.script}'.colored(244)}';
+        result = '${'[$shortcut]'.colored(2)} ${command.name} ${'${command.script}'.colored(244)}'
+            .colored(15, bg: 0);
       }
       stdout.writeln(result);
     }
@@ -45,7 +46,7 @@ result = '\n${command.name}:'.colored(6);
 
   void _drawInput(String input) {
     stdout.writeln('----------------------');
-    stdout.writeln('Input: ${input.colored(2)}');
+    stdout.writeln('Input: ${input.colored(15, bg: 0)}');
     stdout.writeln('----------------------');
   }
 }
