@@ -1,6 +1,6 @@
 name: terrun
 description: terrun - efficient terminal runner
-version: 0.0.10
+version: 0.0.11
 repository: https://github.com/mikeborodin/menusc
 
 environment:
