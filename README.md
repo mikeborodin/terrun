@@ -1,4 +1,10 @@
-# TerRun - Efficient Terminal Runner
+# 🇺🇦 Join master Kenobi - consider making a dronation🇺🇦
+[![Foo](images/dronation.png)](https://u24.gov.ua/dronation)
+
+
+# Terrun
+run anything with minimum keystrokes
+
 
 ## Features:
 * Configurable terminal app runner
@@ -31,7 +37,6 @@ You can also use brew
 ```
 brew upgrade terrun
 ```
-
 
 
 ## Color codes:
