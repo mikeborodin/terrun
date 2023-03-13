@@ -1,4 +1,4 @@
-# 🇺🇦 Join master Kenobi - consider making a dronation🇺🇦
+# 🇺🇦 Join Luke 🇺🇦
 [![Foo](images/dronation.png)](https://u24.gov.ua/dronation)
 
 
