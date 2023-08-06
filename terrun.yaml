@@ -29,12 +29,12 @@ commands:
       m:
         name: experiment
         command: osascript -e 'tell application "System Events" to keystroke "tab" using command down'
-      w:
-        name: personal projects
-        children:
-          e:
-            name: menusc project
-            command: code ~/persHonal_projects/menusc/
+  e:
+    name: easer eggs
+    children:
+      e:
+        name: congratulate
+        command: say "Good job $USER"
 
 hooks:
   preRun:

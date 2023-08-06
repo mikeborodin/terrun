@@ -28,6 +28,7 @@ Feel free to customize it with your own apps/tasks.
 
 Feel free to customize it with your own apps/tasks.
 
+You can configure your terminal to open a floating window with terrun command using a shortcut.
 
 ## Update
 ```
